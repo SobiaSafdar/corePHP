@@ -1,2 +1,2 @@
 
-<footer>copyright</footer>
+<!-- <footer>copyright</footer> -->
