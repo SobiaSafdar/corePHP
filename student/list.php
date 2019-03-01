@@ -1,13 +1,13 @@
 <html>
 <head>
-    <?php include "includes/header.php"; ?>
+    <?php include "../includes/header.php"; ?>
 </head>
 
 
 <body>
 
 <?php
-include "includes/connect.php";
+include "../includes/connect.php";
 
 
 if(isset($_GET['deleteid']))
@@ -32,6 +32,7 @@ $query = "SELECT * FROM student";
 $result = mysqli_query($link, $query);
 
 ?>
+<a href="add.php">Add Student</a>
 <table border=1>
     <thead>
         <tr>
@@ -57,7 +58,7 @@ if(mysqli_num_rows($result) >0)
         echo "<td>".$row['cnic']."</td>";
         echo "<td>".$row['image']."</td>";
         echo "<td>".$row['datetime']."</td>";
-        echo "<td>Edit</td>";
+        echo "<td><a href=edit.php?id=".$row['id'].">  Edit </a></td>";
         echo "<td><a href='?deleteid=".$row['id']."'>Delete</a></td>";
         echo "</tr>";
 
@@ -70,49 +71,12 @@ if(mysqli_num_rows($result) >0)
 </tbody>
 </table>
 
-<?php
-if(isset($_POST['submit']))
-{
-    //var_dump($_POST);
-    $username = $_POST['username'];
-     $cnic = $_POST['cnic'];
-    //echo "submit method called";
-
-    echo $insertquery= "
-    INSERT INTO `student`(`username`, `cnic`)  VALUES ('".$username."','".$cnic."')
-    ";
-    
-    $result = mysqli_query($link, $insertquery) or die("Error in the consult.." . mysqli_error($link));;
-
-    var_dump($result);
-    if($result)
-    {
-        echo "row inserted";
-        header('Location:home.php');
-    }
-    else {
-        echo "Not inserted";    
-    }
-
-}
-?>
-
-<form name="" method="POST">
-
-<input type="text" name="username" placeholder = "Username" >
-<input type="text" name="cnic" placeholder = "cnic">
-<!-- <input type="text" name="image" placeholder = "image"> -->
-
-<input type="submit" name="submit" value="Submit">
-
-</form>
-
 
 
 </body>
 
 
-<?php include "includes/footer.php"; ?>
+<?php include "../includes/footer.php"; ?>
 </html>
 
 
